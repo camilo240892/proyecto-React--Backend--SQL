@@ -1,0 +1,306 @@
+### ============================================
+### CLIENTES
+### ============================================
+
+
+### 1. GET - Obtener todos los clientes
+GET http://localhost:3000/clientes
+
+
+### 2. GET - Buscar cliente por ID
+GET http://localhost:3000/clientes/1
+
+
+### 3. GET - Filtrar clientes por ciudad
+GET http://localhost:3000/clientes?ciudad=Bogota
+
+
+### 4. GET - Filtrar clientes por departamento
+GET http://localhost:3000/clientes?departamento=Antioquia
+
+
+### 5. GET - Filtrar clientes por nombre (búsqueda parcial)
+GET http://localhost:3000/clientes?nomCliente=carlos
+
+
+### 6. POST - Crear cliente (válido)
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+    "nomCliente": "Juan Carrasco",
+    "contacto": "3203999509",
+    "departamento": "Tolima",
+    "ciudad": "Ibague"
+}
+
+
+### 7. POST - Error de validación (falta nomCliente)
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+    "contacto": "3000000000",
+    "departamento": "Cundinamarca",
+    "ciudad": "Bogota"
+}
+
+
+### 8. POST - Error de validación (falta ciudad)
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+    "nomCliente": "Pedro Sanchez",
+    "contacto": "3009998877",
+    "departamento": "Atlantico"
+}
+
+
+### 9. PUT - Actualizar un campo de un cliente existente
+PUT http://localhost:3000/clientes/1
+Content-Type: application/json
+
+{
+    "ciudad": "Floridablanca"
+}
+
+
+### 10. PUT - Actualizar varios campos a la vez
+PUT http://localhost:3000/clientes/2
+Content-Type: application/json
+
+{
+    "contacto": "3221110000",
+    "departamento": "Risaralda",
+    "ciudad": "Pereira"
+}
+
+
+### 11. PUT - Cliente que no existe (debe dar 404)
+PUT http://localhost:3000/clientes/9999
+Content-Type: application/json
+
+{
+    "ciudad": "No existe"
+}
+
+
+### 12. GET - Cliente que no existe (debe dar 404)
+GET http://localhost:3000/clientes/9999
+
+
+### 13. DELETE - Eliminar el cliente creado en el paso 6
+DELETE http://localhost:3000/clientes/4
+
+
+### 14. DELETE - Cliente que no existe (debe dar 404)
+DELETE http://localhost:3000/clientes/9999
+
+
+### 15. GET - Confirmar el listado final de clientes
+GET http://localhost:3000/clientes
+
+
+
+### ============================================
+### PRODUCTOS
+### ============================================
+
+
+### 1. GET - Obtener todos los productos
+GET http://localhost:3000/productos
+
+
+### 2. GET - Buscar producto por ID
+GET http://localhost:3000/productos/1
+
+
+### 3. GET - Filtrar productos por nombre (búsqueda parcial)
+GET http://localhost:3000/productos?nomProducto=mouse
+
+
+### 4. GET - Filtrar productos por cantidad exacta
+GET http://localhost:3000/productos?cantidad=20
+
+
+### 5. GET - Filtrar productos por precio exacto
+GET http://localhost:3000/productos?precio=45000
+
+
+### 6. POST - Crear producto (válido)
+POST http://localhost:3000/productos
+Content-Type: application/json
+
+{
+    "nomProducto": "Audifonos Bluetooth",
+    "cantidad": 30,
+    "precio": 89000
+}
+
+
+### 7. POST - Crear otro producto (válido)
+POST http://localhost:3000/productos
+Content-Type: application/json
+
+{
+    "nomProducto": "Webcam HD 1080p",
+    "cantidad": 15,
+    "precio": 135000
+}
+
+
+### 8. PUT - Actualizar cantidad de un producto
+PUT http://localhost:3000/productos/1
+Content-Type: application/json
+
+{
+    "cantidad": 45
+}
+
+
+### 9. PUT - Actualizar nombre y precio de un producto
+PUT http://localhost:3000/productos/2
+Content-Type: application/json
+
+{
+    "nomProducto": "Mouse inalambrico Logitech",
+    "precio": 52000
+}
+
+
+### 10. PUT - Producto que no existe (debe dar 404)
+PUT http://localhost:3000/productos/9999
+Content-Type: application/json
+
+{
+    "precio": 10000
+}
+
+
+### 11. GET - Producto que no existe (debe dar 404)
+GET http://localhost:3000/productos/9999
+
+
+### 12. DELETE - Eliminar el producto creado en el paso 6
+DELETE http://localhost:3000/productos/4
+
+
+### 13. DELETE - Producto que no existe (debe dar 404)
+DELETE http://localhost:3000/productos/9999
+
+
+### 14. GET - Confirmar el listado final de productos
+GET http://localhost:3000/productos
+
+
+
+### ============================================
+### VENTAS
+### ============================================
+
+
+### 1. GET - Obtener todas las ventas
+GET http://localhost:3000/ventas
+
+
+### 2. GET - Buscar venta por ID
+GET http://localhost:3000/ventas/1
+
+
+### 3. GET - Filtrar ventas por estado
+GET http://localhost:3000/ventas?estado=pendiente
+
+
+### 4. GET - Filtrar ventas por cliente
+GET http://localhost:3000/ventas?id_cliente=1
+
+
+### 5. POST - Crear venta (válida)
+POST http://localhost:3000/ventas
+Content-Type: application/json
+
+{
+    "id_cliente": 1,
+    "fecha_venta": "2026-09-15",
+    "total": 89000,
+    "estado": "pendiente"
+}
+
+
+### 6. POST - Crear otra venta (válida)
+POST http://localhost:3000/ventas
+Content-Type: application/json
+
+{
+    "id_cliente": 2,
+    "fecha_venta": "2026-09-16",
+    "total": 135000,
+    "estado": "completada"
+}
+
+
+### 7. POST - Error: id_cliente que no existe (debe dar 400)
+POST http://localhost:3000/ventas
+Content-Type: application/json
+
+{
+    "id_cliente": 9999,
+    "fecha_venta": "2026-09-16",
+    "total": 50000,
+    "estado": "pendiente"
+}
+
+
+### 8. POST - Error: falta el campo estado (debe dar 400)
+POST http://localhost:3000/ventas
+Content-Type: application/json
+
+{
+    "id_cliente": 1,
+    "fecha_venta": "2026-09-16",
+    "total": 50000
+}
+
+
+### 9. PUT - Actualizar el estado de una venta
+PUT http://localhost:3000/ventas/1
+Content-Type: application/json
+
+{
+    "estado": "completada"
+}
+
+
+### 10. PUT - Actualizar el total de una venta
+PUT http://localhost:3000/ventas/2
+Content-Type: application/json
+
+{
+    "total": 700000
+}
+
+
+### 11. PUT - Venta que no existe (debe dar 404)
+PUT http://localhost:3000/ventas/9999
+Content-Type: application/json
+
+{
+    "estado": "cancelada"
+}
+
+
+### 12. GET - Venta que no existe (debe dar 404)
+GET http://localhost:3000/ventas/9999
+
+
+### 13. DELETE - Eliminar la venta creada en el paso 5
+DELETE http://localhost:3000/ventas/3
+
+
+### 14. DELETE - Venta que no existe (debe dar 404)
+DELETE http://localhost:3000/ventas/9999
+
+
+### 15. GET - Confirmar el listado final de ventas
+GET http://localhost:3000/ventas
